@@ -1,0 +1,44 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: Roboto;
+}
+
+body{
+	text-align: center;
+}
+
+.logo{
+	width: 140px;
+	margin-top: 10px;
+}
+
+form{
+	background-color: #f9f9f9;
+	padding: 20px;
+	display: block;
+	width: 300px;
+	margin: auto;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.31);
+	margin-top: 15px;
+}
+
+form .texte{
+	
+}
+
+form input{
+	width: 200px;
+	font-size: 20px;
+	/* margin-bottom: 20px; */
+	border: solid 1px #cccccc;
+	padding: 10px;
+}
+
+form input[type=submit]{
+	margin-top: 30px;
+	background: linear-gradient(#72e34e, hsla(106, 52%, 48%, 1));
+	border: solid 1px #72e34e;
+	border-radius: 2px;
+	color: white;
+}
