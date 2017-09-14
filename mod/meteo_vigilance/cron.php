@@ -19,17 +19,17 @@ $liste = array(
 $i = 0;
 $message = "";
 
-var_dump($xml_file);
+//var_dump($xml_file);
 
 while ($i < count($liste)) {
-	//$alerte = fonction_mod_mysqlaccess_select("mod_meteo_vigilance","alerte_" . $liste[$i]);
+	$alerte = fonction_mod_mysqlaccess_select("mod_meteo_vigilance","alerte_" . $liste[$i]);
 	$alerte = 99;
 
 	$dep = "dep_" . $liste[$i];
 	$n_alerte = $xml_file->$dep->niveau;
 
 	if ($alerte != $n_alerte){
-		//fonction_mod_mysqlaccess_write($mod, "alerte", $n_alerte);
+		fonction_mod_mysqlaccess_write($mod, "alerte", $n_alerte);
 		$message .= "Le département ".$liste[$i]." est passée en vigilance ".strtolower($xml_file->$dep->alerte).".\r\n";
 	}
 	$i++;
