@@ -11,20 +11,36 @@ include_once __DIR__.'/vigimeteo-master/index.php';
 
 $xml_file = simplexml_load_file(__DIR__."/vigimeteo-master/carte_vigilance_meteo.xml");
 
-$alerte = fonction_mod_mysqlaccess_select("mod_meteo_vigilance","alerte");
+$liste = array(
+				0 => 57,
+				1 => 67,
+	);
 
-$n_alerte = $xml_file->dep_57->niveau;
+$i = 0;
+$message = "";
 
-if ($alerte != $n_alerte){
-	fonction_mod_mysqlaccess_write($mod, "alerte", $n_alerte);
-	$message = "La moselle est pass�e en vigilance ".strtolower($xml_file->dep_57->alerte).".";
-	//fonction_mod_freemobile_sendsms($user, $pass, $message);
-	$boundary = "-----=".md5(rand());
-	$header = "From: \"Major Bot\"<webmaster@quentinix.fr>\r\n";
-	$header .= "MIME-Version: 1.0\r\n";
-	$header .= "Content-Type: multipart/alternative;\r\n"." boundary=\"$boundary\"\r\n";
-	mail($email, $message, $message, $header);
+var_dump($xml_file);
+
+while ($i < count($liste)) {
+	//$alerte = fonction_mod_mysqlaccess_select("mod_meteo_vigilance","alerte_" . $liste[$i]);
+	$alerte = 99;
+
+	$dep = "dep_" . $liste[$i];
+	$n_alerte = $xml_file->$dep->niveau;
+
+	if ($alerte != $n_alerte){
+		//fonction_mod_mysqlaccess_write($mod, "alerte", $n_alerte);
+		$message .= "Le département ".$liste[$i]." est passée en vigilance ".strtolower($xml_file->$dep->alerte).".\r\n";
+	}
+	$i++;
 }
 
+//fonction_mod_freemobile_sendsms($user, $pass, $message);
+$subject = "Changement vigilance météo !";
+$boundary = "-----=".md5(rand());
+$header = "From: \"Major Bot\"<webmaster@quentinix.fr>\r\n";
+$header .= "MIME-Version: 1.0\r\n";
+$header .= "Content-Type: multipart/alternative;\r\n"." boundary=\"$boundary\"\r\n";
+mail($email, $subject, $message, $header);
 
 ?>
