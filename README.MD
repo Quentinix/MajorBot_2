@@ -1,3 +1,3 @@
 # Major Bot 2
 
-Réécriture du bot pour l'automatisation des tâches modulaires.
+Réécriture de l'environnement modulaire pour une automatisation de tâches.
